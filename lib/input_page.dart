@@ -17,25 +17,11 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  bool inactiveCardState = true;
   Color maleCardColor = inactiveCardColour;
   Color femaleCardColor = inactiveCardColour;
 
-  void updateColour(GenderType gender) {
-    if (gender == GenderType.male) {
-      if (maleCardColor == inactiveCardColour) {
-        maleCardColor = activeCardColour;
-        femaleCardColor = inactiveCardColour;
-      } else
-        maleCardColor = inactiveCardColour;
-    }
-    if (gender == GenderType.female) {
-      if (femaleCardColor == inactiveCardColour) {
-        femaleCardColor = activeCardColour;
-        maleCardColor = inactiveCardColour;
-      } else
-        femaleCardColor = inactiveCardColour;
-    }
-  }
+  // void updateGender(GenderType gender) {}
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +36,13 @@ class _InputPageState extends State<InputPage> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    updateColour(GenderType.male);
+                    inactiveCardState
+                        ? maleCardColor = activeCardColour
+                        // ignore: unnecessary_statements
+                        : inactiveCardColour;
+                    inactiveCardState
+                        ? femaleCardColor = inactiveCardColour
+                        : activeCardColour;
                   });
                 },
                 child: ReusableCard(
@@ -64,7 +56,12 @@ class _InputPageState extends State<InputPage> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    updateColour(GenderType.female);
+                    inactiveCardState
+                        ? femaleCardColor = activeCardColour
+                        : inactiveCardColour;
+                    inactiveCardState
+                        ? maleCardColor = inactiveCardColour
+                        : activeCardColour;
                   });
                 },
                 child: ReusableCard(
