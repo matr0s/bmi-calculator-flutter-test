@@ -16,6 +16,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   GenderType selectedGender;
   int height = 176;
+  int weight = 80;
+  int age = 38;
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +105,90 @@ class _InputPageState extends State<InputPage> {
         ),
         Expanded(
           child: Row(children: [
-            Expanded(child: ReusableCard(colour: kActiveCardColour)),
-            Expanded(child: ReusableCard(colour: kActiveCardColour)),
+            Expanded(
+              child: ReusableCard(
+                colour: kActiveCardColour,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'WEIGHT',
+                      style: kLabelStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      children: [
+                        Text(
+                          weight.toString(),
+                          style: kNumTextStyle,
+                        ),
+                        Text(' kg', style: kLabelStyle),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundIconButton(
+                          iconType: FontAwesomeIcons.minus,
+                          onPressed: () {
+                            setState(() {
+                              weight--;
+                            });
+                          },
+                        ),
+                        SizedBox(width: 15.0),
+                        RoundIconButton(
+                          iconType: FontAwesomeIcons.plus,
+                          onPressed: () {
+                            setState(() {
+                              weight++;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: ReusableCard(
+                colour: kActiveCardColour,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'AGE',
+                      style: kLabelStyle,
+                    ),
+                    Text(
+                      age.toString(),
+                      style: kNumTextStyle,
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      RoundIconButton(
+                        iconType: FontAwesomeIcons.minus,
+                        onPressed: () {
+                          setState(() {
+                            age--;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 15.0),
+                      RoundIconButton(
+                        iconType: FontAwesomeIcons.plus,
+                        onPressed: () {
+                          setState(() {
+                            age++;
+                          });
+                        },
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+            )
           ]),
         ),
         Container(
@@ -114,6 +198,25 @@ class _InputPageState extends State<InputPage> {
           width: double.infinity,
         ),
       ]),
+    );
+  }
+}
+
+// MY own widget for the + & - buttons
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({@required this.iconType, @required this.onPressed});
+  final IconData iconType;
+  final Function onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      fillColor: Color(0x298D8E98),
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(width: 56, height: 56),
+      elevation: 6.0,
+      onPressed: onPressed,
+      child: Icon(iconType),
     );
   }
 }
