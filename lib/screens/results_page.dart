@@ -9,6 +9,14 @@ import 'package:flutter/widgets.dart';
 import '../components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.resultText,
+      @required this.bmiResult,
+      @required this.interpretation});
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +31,8 @@ class ResultsPage extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
+              padding: EdgeInsets.all(15.0),
+              alignment: Alignment.bottomLeft,
               child: Text(
                 'Your Result',
                 style: kTitleTextStyle,
@@ -38,15 +48,15 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Normal',
+                    resultText.toUpperCase(),
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '23',
+                    bmiResult,
                     style: kResultNumStyle,
                   ),
                   Text(
-                    'Explanation',
+                    interpretation,
                     style: TextStyle(fontSize: 22.0),
                     textAlign: TextAlign.center,
                   ),
