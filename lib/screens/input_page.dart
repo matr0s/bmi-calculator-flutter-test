@@ -1,10 +1,12 @@
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
-import 'reusable_card.dart';
-import 'reusable_card_child.dart';
-
-// CONST VAR HERE
+import '../constants.dart';
+import '../components/reusable_card.dart';
+import '../components/reusable_card_child.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
 
 enum GenderType { female, male }
 
@@ -191,32 +193,20 @@ class _InputPageState extends State<InputPage> {
             )
           ]),
         ),
-        Container(
-          color: kBottomContainerColor,
-          margin: EdgeInsets.only(top: 10.0),
-          height: kBottomContainerHeight,
-          width: double.infinity,
+        BottomButton(
+          buttonLabel: 'CALCULATE',
+          onPress: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ResultsPage();
+                },
+              ),
+            );
+          },
         ),
       ]),
-    );
-  }
-}
-
-// MY own widget for the + & - buttons
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.iconType, @required this.onPressed});
-  final IconData iconType;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      fillColor: Color(0x298D8E98),
-      shape: CircleBorder(),
-      constraints: BoxConstraints.tightFor(width: 56, height: 56),
-      elevation: 6.0,
-      onPressed: onPressed,
-      child: Icon(iconType),
     );
   }
 }
